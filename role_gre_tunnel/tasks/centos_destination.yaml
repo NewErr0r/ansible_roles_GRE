@@ -1,0 +1,34 @@
+---
+- name: Configure GRE Tunnel destination 
+  template:
+    src: tunnel_destination.j2
+    dest: "{{ path_file_gre }}"
+
+- name: Set launch rights
+  file: 
+    path: "{{ path_file_gre }}"
+    state: file 
+    mode: +x
+
+- name: Adding a script to the startup
+  shell:  |
+    echo "@reboot root {{ path_file_gre }}"  >> /etc/crontab
+
+- name: Tunnel GRE UP
+  command: sh {{ path_file_gre }}
+
+- name: Configure Firewalld protocols
+  firewalld: 
+    service: gre
+    permanent: yes
+    state: enabled
+  notify:
+    - Restart Firewalld
+
+- name: Configure Firewalld ports 
+  firewalld: 
+    port: '47/tcp'
+    permanent: yes 
+    state: enabled
+  notify:
+    - Restart Firewalld

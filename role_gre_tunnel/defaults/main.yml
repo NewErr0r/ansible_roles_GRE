@@ -1,0 +1,10 @@
+---
+tunnel_name: 'tun1'
+
+ip_local_source: '192.168.0.151'
+ip_remote_destination: '192.168.0.152'
+
+ip_tunnel_1: '10.5.5.1/30'
+ip_tunnel_2: '10.5.5.2/30'
+
+path_file_gre: /etc/gre.up

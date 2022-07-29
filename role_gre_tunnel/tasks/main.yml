@@ -1,0 +1,23 @@
+---
+##########################CentOS################################
+- name: Deploy Tunnel source on CentOS
+  include_tasks: centos_source.yaml
+  when: 
+    - ansible_os_family == 'RedHat'
+
+#- name: Deploy Tunnel destination on CentOS
+#  include_tasks: centos_destination.yaml
+#  when: 
+#    - ansible_os_family == 'RedHat'
+
+##########################Debian################################
+
+#- name: Deploy Tunnel source on Debian
+#  include_tasks: debian_source.yaml
+#  when: 
+#    - ansible_os_family == 'Debian'
+
+- name: Deploy Tunnel destination on Debian
+  include_tasks: debian_destination.yaml
+  when: 
+    - ansible_os_family == 'Debian'

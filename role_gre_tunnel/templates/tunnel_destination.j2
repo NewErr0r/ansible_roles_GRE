@@ -1,0 +1,4 @@
+#!/bin/bash
+ip tunnel add {{ tunnel_name }} mode gre local {{ ip_remote_destination }} remote {{ ip_local_source }} ttl 255
+ip link set {{ tunnel_name }} up
+ip addr add {{ ip_tunnel_2 }} dev {{ tunnel_name }}

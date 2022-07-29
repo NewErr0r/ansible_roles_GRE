@@ -1,0 +1,7 @@
+---
+- name: Deploy GRE Tunnel
+  hosts: all
+  become: true
+
+  roles:
+    - role_gre_tunnel

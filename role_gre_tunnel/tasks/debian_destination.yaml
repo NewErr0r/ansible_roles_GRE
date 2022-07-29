@@ -1,0 +1,18 @@
+---
+- name: Configure GRE Tunnel destination 
+  template:
+    src: tunnel_destination.j2
+    dest: "{{ path_file_gre }}"
+
+- name: Set launch rights
+  file: 
+    path: "{{ path_file_gre }}"
+    state: file 
+    mode: +x
+
+- name: Adding a script to the startup
+  shell:  |
+    echo "post up {{ path_file_gre }}"  >> /etc/network/interfaces
+
+- name: Tunnel GRE UP
+  command: sh {{ path_file_gre }}
